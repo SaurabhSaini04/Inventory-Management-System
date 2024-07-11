@@ -36,6 +36,39 @@ def display_mobiles(request):
     }
     return render(request, 'inv/index.html', context)
 
+def display_printers(request):
+    items = Printers.objects.all()
+    context = {
+        'items': items,
+        'header': 'Printers',
+    }
+    return render(request, 'inv/index.html', context)
+
+def display_routers(request):
+    items = Routers.objects.all()
+    context = {
+        'items': items,
+        'header': 'Routers',
+    }
+    return render(request, 'inv/index.html', context)
+
+# ---------------
+def display_toughpad(request):
+    items = Toughpad.objects.all()
+    context = {
+        'items': items,
+        'header': 'Toughpad',
+    }
+    return render(request,'inv/index.html', context)
+def display_toughbook(request):
+    items = Toughbook.objects.all()
+    context = {
+        'items': items,
+        'header': 'Toughbook',
+    }
+    return render(request,'inv/index.html', context)
+# ---------------
+
 def add_item(request, cls):
     if request.method == "POST":
         form = cls(request.POST)
@@ -52,7 +85,6 @@ def add_item(request, cls):
 def add_laptop(request):
     return add_item(request, LaptopForm)
 
-
 def add_desktop(request):
     return add_item(request, DesktopForm)
 
@@ -60,6 +92,18 @@ def add_desktop(request):
 def add_mobile(request):
     return add_item(request, MobileForm)
 
+def add_printers(request):
+    return add_item(request, PrinterForm)
+
+def add_routers(request):
+    return add_item(request, RouterForm)
+# ------
+def add_toughpad(request):
+    return add_item(request,ToughpadForm)
+
+def add_toughbook(request):
+    return add_item(request, ToughbookForm)
+# --------
 
 def edit_item(request, pk, model, cls):
     item = get_object_or_404(model, pk=pk)
@@ -86,6 +130,18 @@ def edit_desktop(request, pk):
 
 def edit_mobile(request, pk):
     return edit_item(request, pk, Mobiles, MobileForm)
+
+def edit_printers(request, pk):
+    return edit_item(request, pk, Printers, PrinterForm)
+
+def edit_routers(request, pk):
+    return edit_item(request, pk, Routers, RouterForm)
+# ----
+def edit_toughpad(request, pk):
+    return edit_item(request, pk, Routers, ToughpadForm)
+def edit_toughbook(request, pk):
+    return edit_item(request, pk, Routers, ToughbookForm)
+# ----
 
 
 def delete_laptop(request, pk):
@@ -127,4 +183,57 @@ def delete_mobile(request, pk):
         'items': items,
     }
 
+def delete_printers(request, pk):
+
+    template = 'inv/index.html'
+    Printers.objects.filter(id=pk).delete()
+
+    items = Printers.objects.all()
+
+    context = {
+        'items': items,
+    }    
+
     return render(request, template, context)
+
+def delete_routers(request, pk):
+
+    template = 'inv/index.html'
+    Routers.objects.filter(id=pk).delete()
+
+    items = Routers.objects.all()
+
+    context = {
+        'items': items,
+    }    
+    
+    return render(request, template, context)
+
+
+# ----
+def delete_toughpad(request, pk):
+
+    template = 'inv/index.html'
+    Toughpad.objects.filter(id=pk).delete()
+
+    items = Toughpad.objects.all()
+
+    context = {
+        'items': items,
+    }    
+    
+    return render(request, template, context)
+def delete_toughbook(request, pk):
+
+    template = 'inv/index.html'
+    Toughbook.objects.filter(id=pk).delete()
+
+    items = Toughbook.objects.all()
+
+    context = {
+        'items': items,
+    }    
+    
+    return render(request, template, context)
+# ----
+
