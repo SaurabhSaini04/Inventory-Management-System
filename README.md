@@ -1,2 +1,2 @@
 # Inventory-Management-System
-A Basic Inventory Management System using django.
+A Inventory Management System using django.
